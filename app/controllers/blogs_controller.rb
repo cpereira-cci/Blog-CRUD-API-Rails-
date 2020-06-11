@@ -42,7 +42,7 @@ class BlogsController < ApplicationController
     private
 
     def blog_params
-        params.permit(:title, :body, :image)
+        params.permit(:title, :body, :image, :image_name)
     end
     
     def find_blog
