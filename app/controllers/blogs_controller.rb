@@ -2,7 +2,7 @@ class BlogsController < ApplicationController
     before_action :find_blog, only: [:show, :update, :destroy]
 
     def index
-        @blogs = Blog.all
+        @blogs = current_user.blogs
         render json: @blogs
     end
 
@@ -11,7 +11,7 @@ class BlogsController < ApplicationController
     end
 
     def create
-        @blog = Blog.new(blog_params)
+        @blog = current_user.blogs.new(blog_params)
         if @blog.save
             render json: @blog
         else
@@ -37,7 +37,6 @@ class BlogsController < ApplicationController
         end
     end
 
-
     
     private
 
@@ -46,6 +45,6 @@ class BlogsController < ApplicationController
     end
     
     def find_blog
-        @blog = Blog.find(params[:id])
+        @blog = current_user.blogs.find(params[:id])
     end
 end
